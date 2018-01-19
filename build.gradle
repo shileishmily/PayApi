@@ -1,0 +1,66 @@
+apply plugin: 'war'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.8
+
+repositories {
+    maven{ url 'http://maven.youguu.com:8081/nexus/content/groups/java_youguu/'}
+}
+
+compileJava {
+    options.encoding = 'UTF-8'
+}
+
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+dependencies {
+
+    /** Common **/
+    compile 'commons-pool:commons-pool:1.6'
+    compile 'commons-lang:commons-lang:2.6'
+    compile 'commons-logging:commons-logging:1.1.3'
+
+
+    /** Spring **/
+    compile 'org.aspectj:aspectjweaver:1.8.5'
+    compile 'org.springframework:spring-core:3.2.5.RELEASE'
+    compile 'org.springframework:spring-context:3.2.5.RELEASE'
+    compile 'org.springframework:spring-jdbc:3.2.5.RELEASE'
+    compile 'org.springframework:spring-web:3.2.5.RELEASE'
+    compile 'org.springframework:spring-beans:3.2.5.RELEASE'
+    compile 'org.springframework:spring-aop:3.2.5.RELEASE'
+    compile 'org.springframework:spring-expression:3.2.5.RELEASE'
+    compile 'org.springframework:spring-context-support:3.2.5.RELEASE'
+
+    /** Mq **/
+    compile 'org.apache.qpid:qpid-client:0.24'
+    compile 'org.apache.geronimo.specs:geronimo-jms_1.1_spec:1.1'
+    /**zookeeper **/
+    compile 'org.apache.curator:curator-recipes:2.8.0'
+    compile 'com.alibaba:fastjson:1.2.5'
+
+    /** Log **/
+    compile 'org.slf4j:slf4j-log4j12:1.7.10'
+    compile 'org.slf4j:slf4j-api:1.7.5'
+    compile 'log4j:log4j:1.2.17'
+
+    compile 'javax.servlet:servlet-api:2.5'
+
+    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.2'
+    compile group: 'org.apache.httpcomponents', name: 'httpcore', version: '4.4.4'
+
+    /** core **/
+    compile group: "com.youguu", name: "youguu-core", version: "4.0",changing: true exclude module: 'appcompat-v7'
+
+
+    compile 'log4j:log4j:1.2.17'
+    compile fileTree(dir: 'src/main/webapp/WEB-INF/lib', include: '*.jar')
+
+}
